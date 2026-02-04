@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* RKR glass card hover effect */
+.rkr-glass-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.rkr-glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 250ms ease;
+  background: radial-gradient(
+    circle at top right,
+    rgba(34, 197, 94, 0.28),
+    rgba(34, 197, 94, 0.0) 60%
+  );
+}
+
+.rkr-glass-card:hover::before {
+  opacity: 1;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
