@@ -121,15 +121,12 @@ export default function Footer() {
 
                 <a
                   className="rkr-glass-card block rounded-2xl border border-white/10 bg-white/5 p-4 transition hover:border-white/40"
-                  href="mailto:rkrcybertech@gmail.com"
+                  href="mailto:info@rkrbrandtech.com"
                 >
                     <div className="relative z-10"></div>
                   <div className="text-xs text-gray-200/70">Email</div>
                   <div className="mt-1 font-semibold text-white">
-                    rkrcybertech@gmail.com
-                  </div>
-                  <div className="mt-1 text-xs text-gray-200/50">
-                    (Will be updated to official domain)
+                    info@rkrbrandtech.com
                   </div>
                 </a>
 

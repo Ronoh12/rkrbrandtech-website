@@ -21,6 +21,7 @@ export default function Navbar() {
       { to: "/portfolio", label: "Portfolio" },
       { to: "/insights", label: "Insights" },
       { to: "/about", label: "About" },
+      { to: "/pricing", label: "Pricing" },
       { to: "/contact", label: "Contact" },
     ],
     []

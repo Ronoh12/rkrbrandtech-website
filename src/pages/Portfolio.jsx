@@ -1,66 +1,30 @@
-import { useEffect } from "react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Container from "../components/Container";
+import Skeleton from "../components/Skeleton";
+import PageTransition from "../components/PageTransition";
+import { setMeta } from "../utils/seo";
 
-const Tag = ({ children }) => (
-  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-gray-200">
-    {children}
-  </span>
-);
-
-function ProjectCard({ project }) {
+function PortfolioCard({ title, desc, tags }) {
   return (
-    <div className="rkr-glass-card relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-white/40">
-      <div className="relative z-10">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <div className="inline-flex items-center rounded-full border border-green-500/25 bg-green-500/10 px-3 py-1 text-xs text-green-200">
-              {project.category}
-            </div>
-            <h3 className="mt-3 text-white font-semibold text-xl">
-              {project.title}
-            </h3>
-            <p className="mt-2 text-sm text-gray-300 leading-relaxed">
-              {project.summary}
-            </p>
-          </div>
+    <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:border-white/30 hover:-translate-y-0.5">
+      {/* glow */}
+      <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition">
+        <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-green-500/12 blur-3xl" />
+      </div>
 
-          <div className="h-11 w-11 rounded-2xl border border-green-500/25 bg-green-500/10 flex items-center justify-center text-lg">
-            {project.icon}
-          </div>
-        </div>
+      <div className="relative z-10">
+        <div className="text-white font-semibold text-lg">{title}</div>
+        <p className="mt-2 text-sm text-gray-300 leading-relaxed">{desc}</p>
 
         <div className="mt-4 flex flex-wrap gap-2">
-          {project.tags.map((t) => (
-            <Tag key={t}>{t}</Tag>
+          {tags.map((t) => (
+            <span
+              key={t}
+              className="inline-flex items-center rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs text-gray-200"
+            >
+              {t}
+            </span>
           ))}
-        </div>
-
-        <div className="mt-5 rounded-2xl border border-white/10 bg-black/30 p-4">
-          <div className="text-xs text-gray-500">Deliverables</div>
-          <ul className="mt-2 space-y-2 text-sm text-gray-300">
-            {project.deliverables.map((d, i) => (
-              <li key={i} className="flex items-start gap-2">
-                <span className="mt-1 h-2 w-2 rounded-full bg-green-500/70" />
-                <span>{d}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="mt-6 flex flex-col sm:flex-row gap-3">
-          <a
-            href="/contact"
-            className="rounded-xl bg-green-600 px-5 py-3 text-sm font-semibold text-white hover:bg-green-500 transition text-center"
-          >
-            Request Similar Work
-          </a>
-          <a
-            href="/services"
-            className="rounded-xl border border-white/15 bg-black/30 px-5 py-3 text-sm font-semibold text-white hover:border-white/30 transition text-center"
-          >
-            View Services
-          </a>
         </div>
       </div>
     </div>
@@ -68,163 +32,143 @@ function ProjectCard({ project }) {
 }
 
 export default function Portfolio() {
-  const projects = useMemo(
+  const [loading, setLoading] = useState(true);
+
+  const items = useMemo(
     () => [
       {
         id: 1,
-        category: "Managed IT",
-        icon: "🧩",
-        title: "SME IT Support & Maintenance Workflow",
-        summary:
-          "Designed a repeatable IT support process for small offices: diagnostics, remote support, scheduled checks, and reporting.",
-        tags: ["Remote Support", "Helpdesk", "Documentation"],
-        deliverables: [
-          "Support workflow checklist (intake → fix → follow-up)",
-          "Monthly maintenance checklist (updates, cleanup, backups)",
-          "Device inventory template + basic reporting format",
-        ],
+        title: "SME IT Support Setup",
+        desc: "Workstations, printers, user accounts, and basic stability improvements for a small office.",
+        tags: ["IT Support", "On-site", "Setup"],
       },
       {
         id: 2,
-        category: "Cybersecurity",
-        icon: "🛡️",
-        title: "Network Vulnerability Scan + Report (SME style)",
-        summary:
-          "Performed an internal network assessment focusing on open ports, risky services, and remediation guidance.",
-        tags: ["Assessment", "Reporting", "Risk Reduction"],
-        deliverables: [
-          "Vulnerability scan summary report (non-technical + technical)",
-          "Priority fixes list (High/Med/Low)",
-          "Hardening recommendations (MFA, updates, backups)",
-        ],
+        title: "Wi-Fi & Router Hardening",
+        desc: "Improved Wi-Fi stability, better configuration, and security hardening guidance.",
+        tags: ["Network", "Security", "Wi-Fi"],
       },
       {
         id: 3,
-        category: "Cybersecurity",
-        icon: "📶",
-        title: "Wi-Fi Security Hardening (Business Setup)",
-        summary:
-          "Improved Wi-Fi security posture with strong configurations, guest network separation, and access controls.",
-        tags: ["Wi-Fi", "Hardening", "SME Security"],
-        deliverables: [
-          "Secure Wi-Fi configuration checklist",
-          "Guest network separation guidance",
-          "Password & access policy recommendations",
-        ],
+        title: "Remote Support for Business Systems",
+        desc: "Secure remote troubleshooting and support with clear communication and documentation.",
+        tags: ["Remote Support", "Helpdesk", "SME"],
       },
       {
         id: 4,
-        category: "Business Tech Setup",
-        icon: "⚙️",
-        title: "Business Email + Cloud Storage Permissions Setup",
-        summary:
-          "Created structured cloud folders and access permissions for teams, plus business email readiness guidance.",
-        tags: ["Google Drive", "Permissions", "Business Email"],
-        deliverables: [
-          "Folder structure template (Departments/Finance/HR/Projects)",
-          "Permissions plan (owners/editors/viewers)",
-          "Business email setup checklist",
-        ],
+        title: "Email Security & MFA Guidance",
+        desc: "Reduced risk of account takeover by guiding MFA setup and safer password practices.",
+        tags: ["Email", "MFA", "Security"],
       },
       {
         id: 5,
-        category: "Branding Division",
-        icon: "🎨",
-        title: "Brand Identity Starter Pack (Design + Print)",
-        summary:
-          "Prepared a basic brand identity and print-ready materials for a small business presence.",
-        tags: ["Branding", "Print", "Merchandise"],
-        deliverables: [
-          "Logo usage guidance (spacing, backgrounds)",
-          "Business card + flyer design (print-ready)",
-          "Merch mockup direction (mugs/t-shirts)",
-        ],
+        title: "Cybersecurity Check (Non-invasive)",
+        desc: "Baseline security review, quick wins, and a clear report with next steps.",
+        tags: ["Cyber Check", "Reporting", "SME"],
+      },
+      {
+        id: 6,
+        title: "Branding & Print Delivery",
+        desc: "Brand assets and merchandise support through our branding division.",
+        tags: ["Branding", "Print", "Merch"],
       },
     ],
     []
   );
 
-  const categories = ["All", "Managed IT", "Cybersecurity", "Business Tech Setup", "Branding Division"];
-  const [active, setActive] = useState("All");
+  useEffect(() => {
+    setMeta({
+      title: "Portfolio | RKR BrandTech Solutions",
+      description:
+        "Examples of IT support, cybersecurity checks, remote support, and branding work delivered for businesses.",
+      url: "https://rkrbrandtech.com/portfolio",
+      image: "https://rkrbrandtech.com/og-image.png",
+    });
 
-  const filtered = useMemo(() => {
-    if (active === "All") return projects;
-    return projects.filter((p) => p.category === active);
-  }, [projects, active]);
+    const t = setTimeout(() => setLoading(false), 800);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
-    <div className="bg-black">
-      {/* Hero */}
-      <section className="border-b border-white/10">
-        <Container className="py-10 md:py-14">
-          <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center rounded-full border border-green-500/25 bg-green-500/10 px-4 py-2 text-xs text-green-200">
-              Portfolio
+    <PageTransition>
+      <div className="bg-black min-h-screen">
+        {/* Hero */}
+        <section className="border-b border-white/10">
+          <Container className="py-10 md:py-14">
+            <div className="max-w-3xl mx-auto text-center">
+              <div className="inline-flex items-center rounded-full border border-green-500/25 bg-green-500/10 px-4 py-2 text-xs text-green-200">
+                Portfolio
+              </div>
+
+              <h1 className="mt-4 text-3xl md:text-5xl font-bold text-white tracking-tight">
+                Work delivered & capabilities
+              </h1>
+
+              <p className="mt-3 text-sm md:text-base text-gray-300 leading-relaxed">
+                A snapshot of the type of support and security improvements we
+                deliver for businesses.
+              </p>
             </div>
+          </Container>
+        </section>
 
-            <h1 className="mt-4 text-3xl md:text-5xl font-bold text-white tracking-tight">
-              Proof of Work & Deliverables
-            </h1>
+        {/* Grid */}
+        <section>
+          <Container className="py-10 md:py-14">
+            <div className="flex items-center justify-between gap-4 flex-wrap">
+              <div>
+                <h2 className="text-xl md:text-2xl font-bold text-white">
+                  Highlights
+                </h2>
+                <p className="mt-1 text-sm text-gray-400">
+                  More case studies can be added as we complete client projects.
+                </p>
+              </div>
 
-            <p className="mt-3 text-sm md:text-base text-gray-300 leading-relaxed">
-              Clients trust visible results. Here are examples of what we deliver: reports,
-              checklists, workflows, and professional documentation.
-            </p>
-          </div>
-
-          {/* Filters */}
-          <div className="mt-8 flex flex-wrap gap-2 justify-center">
-            {categories.map((c) => (
-              <button
-                key={c}
-                onClick={() => setActive(c)}
-                className={`px-4 py-2 rounded-xl text-sm border transition ${
-                  active === c
-                    ? "border-green-500/35 bg-green-500/10 text-green-200"
-                    : "border-white/10 bg-white/5 text-gray-200 hover:border-white/25"
-                }`}
-              >
-                {c}
-              </button>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Projects */}
-      <section>
-        <Container className="py-10 md:py-14">
-          <div className="grid gap-4 lg:grid-cols-2">
-            {filtered.map((p) => (
-              <ProjectCard key={p.id} project={p} />
-            ))}
-          </div>
-
-          {/* CTA */}
-          <div className="mt-10 rounded-3xl border border-white/10 bg-gradient-to-br from-black via-black to-green-950 p-7 md:p-10 text-center">
-            <h3 className="text-xl md:text-2xl font-bold text-white">
-              Want a report like this for your business?
-            </h3>
-            <p className="mt-2 text-sm md:text-base text-gray-300 max-w-2xl mx-auto leading-relaxed">
-              Book a consultation and we’ll recommend the best approach for your environment.
-            </p>
-            <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
               <a
                 href="/contact"
-                className="rounded-xl bg-green-600 px-6 py-3 text-sm font-semibold text-white hover:bg-green-500 transition text-center"
+                className="rounded-xl bg-green-600 px-5 py-3 text-sm font-semibold text-white hover:bg-green-500 transition"
               >
-                Book a Consultation
-              </a>
-              <a
-                href="/services"
-                className="rounded-xl border border-white/15 bg-black/30 px-6 py-3 text-sm font-semibold text-white hover:border-white/30 transition text-center"
-              >
-                Explore Services
+                Request Support
               </a>
             </div>
-          </div>
-        </Container>
-      </section>
-    </div>
+
+            <div className="mt-8">
+              {loading ? (
+                <div className="grid gap-4 md:grid-cols-3">
+                  {Array.from({ length: 6 }).map((_, i) => (
+                    <div
+                      key={i}
+                      className="rounded-2xl border border-white/10 bg-white/5 p-5"
+                    >
+                      <Skeleton className="h-6 w-2/3 mb-3" />
+                      <Skeleton className="h-4 w-full mb-2" />
+                      <Skeleton className="h-4 w-11/12 mb-2" />
+                      <Skeleton className="h-4 w-3/4 mb-4" />
+                      <div className="flex gap-2 flex-wrap">
+                        <Skeleton className="h-6 w-16" />
+                        <Skeleton className="h-6 w-20" />
+                        <Skeleton className="h-6 w-14" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="grid gap-4 md:grid-cols-3">
+                  {items.map((x) => (
+                    <PortfolioCard
+                      key={x.id}
+                      title={x.title}
+                      desc={x.desc}
+                      tags={x.tags}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          </Container>
+        </section>
+      </div>
+    </PageTransition>
   );
 }
