@@ -1,32 +1,107 @@
+<!-- /index.html -->
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/favicon.png" />
-
-    <meta name="author" content="RKR BrandTech Solutions">
-    <meta name="contact" content="info@rkrbrandtech.com">
-
-    <!-- Title + Description -->
+    <!-- Primary -->
     <title>RKR BrandTech Solutions | Managed IT • Cybersecurity • Branding</title>
     <meta
       name="description"
       content="RKR BrandTech Solutions provides Managed IT Support, practical Cybersecurity, and Branding/Print services for businesses in Kenya. Remote support available, Kenya-wide on-site support."
     />
+    <meta name="author" content="RKR BrandTech Solutions" />
+    <meta name="contact" content="info@rkrbrandtech.com" />
     <meta name="theme-color" content="#22c55e" />
 
-    <!-- Open Graph (WhatsApp/Facebook preview) -->
-    <meta property="og:title" content="RKR BrandTech Solutions" />
+    <!-- Canonical (helps avoid duplicate URL issues) -->
+    <link rel="canonical" href="https://rkrbrandtech.com/" />
+
+    <!-- Favicon + App Icons -->
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+
+    <!-- Social Preview -->
+    <meta property="og:site_name" content="RKR BrandTech Solutions" />
+    <meta property="og:title" content="RKR BrandTech Solutions | Managed IT • Cybersecurity • Branding" />
     <meta
       property="og:description"
       content="Managed IT Support • Cybersecurity • Branding Division. Remote support available. Kenya-wide on-site support."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/og-image.png" />
-</head>
+    <meta property="og:url" content="https://rkrbrandtech.com/" />
+    <meta property="og:image" content="https://rkrbrandtech.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter/X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="RKR BrandTech Solutions | Managed IT • Cybersecurity • Branding" />
+    <meta
+      name="twitter:description"
+      content="Managed IT Support • Cybersecurity • Branding Division. Remote support available. Kenya-wide on-site support."
+    />
+    <meta name="twitter:image" content="https://rkrbrandtech.com/og-image.png" />
+
+    <!-- Preconnect (optional) -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
+
+    <!-- ✅ Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-13500766195"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-13500766195', {
+        anonymize_ip: true
+      });
+    </script>
+
+    <!-- ✅ Structured Data (Organization + WebSite) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://rkrbrandtech.com/#organization",
+            "name": "RKR BrandTech Solutions",
+            "url": "https://rkrbrandtech.com",
+            "logo": "https://rkrbrandtech.com/logo.png",
+            "email": "info@rkrbrandtech.com",
+            "telephone": "+254729279513",
+            "areaServed": "KE",
+            "sameAs": [
+              "https://wa.me/254729279513"
+            ],
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "telephone": "+254729279513",
+                "contactType": "customer service",
+                "areaServed": "KE",
+                "availableLanguage": ["en"]
+              }
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://rkrbrandtech.com/#website",
+            "url": "https://rkrbrandtech.com/",
+            "name": "RKR BrandTech Solutions",
+            "publisher": { "@id": "https://rkrbrandtech.com/#organization" }
+          }
+        ]
+      }
+    </script>
+  </head>
 
   <body>
     <div id="root"></div>

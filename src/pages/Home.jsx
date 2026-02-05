@@ -1,8 +1,10 @@
+// src/pages/Home.jsx
 import { useEffect } from "react";
 import Container from "../components/Container";
 import HeroSlider from "../components/HeroSlider";
-import { setMeta } from "../utils/seo";
+import TrustSection from "../components/TrustSection";
 import PageTransition from "../components/PageTransition";
+import { setMeta } from "../utils/seo";
 
 function FeatureCard({ icon, title, desc }) {
   return (
@@ -26,6 +28,8 @@ export default function Home() {
       title: "RKR BrandTech Solutions | Managed IT • Cybersecurity • Branding",
       description:
         "Tech-first support for businesses in Kenya: Managed IT support (remote & on-site), practical cybersecurity, and a branding/print division for complete business growth.",
+      url: "https://rkrbrandtech.com/",
+      image: "https://rkrbrandtech.com/og-image.png",
     });
   }, []);
 
@@ -57,6 +61,13 @@ export default function Home() {
           </Container>
         </section>
 
+        {/* ✅ Trust / Testimonials */}
+        <section className="border-t border-white/10">
+          <Container className="py-10 md:py-14">
+            <TrustSection />
+          </Container>
+        </section>
+
         {/* Core services overview */}
         <section className="border-t border-white/10">
           <Container className="py-10 md:py-14">
@@ -68,8 +79,8 @@ export default function Home() {
                 Tech-first solutions for businesses in Kenya
               </h2>
               <p className="mt-3 text-sm md:text-base text-gray-300 leading-relaxed">
-                From stable IT systems to practical security improvements and
-                professional branding— we help your business operate confidently.
+                From stable IT systems to practical security improvements and professional branding—
+                we help your business operate confidently.
               </p>
             </div>
 
@@ -121,8 +132,8 @@ export default function Home() {
                 Ready to improve your IT and security?
               </h3>
               <p className="mt-2 text-sm md:text-base text-gray-300 max-w-2xl mx-auto leading-relaxed">
-                We provide remote support and Kenya-wide on-site visits (scheduled).
-                Let’s discuss what your business needs.
+                We provide remote support and Kenya-wide on-site visits (scheduled). Let’s discuss
+                what your business needs.
               </p>
 
               <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
