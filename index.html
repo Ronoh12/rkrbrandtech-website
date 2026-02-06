@@ -54,53 +54,43 @@
     <link rel="preconnect" href="https://www.google-analytics.com" />
 
     <!-- ✅ Google Analytics (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-13500766195"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0NPRKNZSXH"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-13500766195', {
-        anonymize_ip: true
-      });
+
+      gtag('config', 'G-0NPRKNZSXH');
     </script>
+
 
     <!-- ✅ Structured Data (Organization + WebSite) -->
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "Organization",
-            "@id": "https://rkrbrandtech.com/#organization",
-            "name": "RKR BrandTech Solutions",
-            "url": "https://rkrbrandtech.com",
-            "logo": "https://rkrbrandtech.com/logo.png",
-            "email": "info@rkrbrandtech.com",
-            "telephone": "+254729279513",
-            "areaServed": "KE",
-            "sameAs": [
-              "https://wa.me/254729279513"
-            ],
-            "contactPoint": [
-              {
-                "@type": "ContactPoint",
-                "telephone": "+254729279513",
-                "contactType": "customer service",
-                "areaServed": "KE",
-                "availableLanguage": ["en"]
-              }
-            ]
-          },
-          {
-            "@type": "WebSite",
-            "@id": "https://rkrbrandtech.com/#website",
-            "url": "https://rkrbrandtech.com/",
-            "name": "RKR BrandTech Solutions",
-            "publisher": { "@id": "https://rkrbrandtech.com/#organization" }
-          }
-        ]
-      }
+    {
+      "@context": "https://schema.org",
+      "@type": "ITService",
+      "name": "RKR BrandTech Solutions",
+      "url": "https://rkrbrandtech.com",
+      "logo": "https://rkrbrandtech.com/logo.png",
+      "image": "https://rkrbrandtech.com/og-image.png",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Kenya"
+      },
+      "availableLanguage": ["en"],
+      "contactPoint": [{
+        "@type": "ContactPoint",
+        "telephone": "+254729279513",
+        "contactType": "customer support",
+        "areaServed": "KE"
+      }],
+      "sameAs": [
+        "https://wa.me/254729279513"
+      ]
+    }
     </script>
+
   </head>
 
   <body>

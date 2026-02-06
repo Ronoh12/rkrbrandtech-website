@@ -8,7 +8,7 @@ import { setMeta } from "../utils/seo";
 
 function FeatureCard({ icon, title, desc }) {
   return (
-    <div className="rkr-glass-card relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-white/40">
+    <div className="rkr-glass-card group relative overflow-hidden rounded-2xl border border-green-500/10 bg-white/5 p-6 transition hover:border-green-500/40">
       <div className="relative z-10 flex items-start gap-3">
         <div className="h-11 w-11 rounded-2xl border border-green-500/25 bg-green-500/10 flex items-center justify-center text-lg">
           {icon}
@@ -17,6 +17,11 @@ function FeatureCard({ icon, title, desc }) {
           <div className="text-white font-semibold text-lg">{title}</div>
           <p className="mt-2 text-sm text-gray-300 leading-relaxed">{desc}</p>
         </div>
+      </div>
+
+      {/* subtle premium green hover glow */}
+      <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition">
+        <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-green-500/12 blur-3xl" />
       </div>
     </div>
   );
@@ -61,15 +66,15 @@ export default function Home() {
           </Container>
         </section>
 
-        {/* ✅ Trust / Testimonials */}
-        <section className="border-t border-white/10">
+        {/* Trust / Testimonials */}
+        <section className="border-t border-green-500/10">
           <Container className="py-10 md:py-14">
             <TrustSection />
           </Container>
         </section>
 
         {/* Core services overview */}
-        <section className="border-t border-white/10">
+        <section className="border-t border-green-500/10">
           <Container className="py-10 md:py-14">
             <div className="text-center max-w-3xl mx-auto">
               <div className="inline-flex items-center rounded-full border border-green-500/25 bg-green-500/10 px-4 py-2 text-xs text-green-200">
@@ -107,27 +112,29 @@ export default function Home() {
               />
             </div>
 
+            {/* ✅ Premium CTAs */}
             <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
               <a
                 href="/services"
-                className="rounded-xl bg-green-600 px-6 py-3 text-sm font-semibold text-white hover:bg-green-500 transition text-center"
+                className="rkr-btn rkr-btn-primary rkr-btn-arrow text-center"
               >
-                Explore Services
+                Explore Services <span>→</span>
               </a>
+
               <a
                 href="/contact"
-                className="rounded-xl border border-white/15 bg-black/30 px-6 py-3 text-sm font-semibold text-white hover:border-white/30 transition text-center"
+                className="rkr-btn rkr-btn-secondary rkr-btn-arrow text-center"
               >
-                Book a Consultation
+                Book a Consultation <span>→</span>
               </a>
             </div>
           </Container>
         </section>
 
         {/* CTA band */}
-        <section className="border-t border-white/10">
+        <section className="border-t border-green-500/10">
           <Container className="py-10 md:py-14">
-            <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-black via-black to-green-950 p-7 md:p-10 text-center">
+            <div className="rounded-3xl border border-green-500/10 bg-gradient-to-br from-black via-black to-green-950 p-7 md:p-10 text-center">
               <h3 className="text-xl md:text-2xl font-bold text-white">
                 Ready to improve your IT and security?
               </h3>
@@ -136,18 +143,20 @@ export default function Home() {
                 what your business needs.
               </p>
 
+              {/* ✅ Premium CTAs */}
               <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
                 <a
                   href="/contact"
-                  className="rounded-xl bg-green-600 px-6 py-3 text-sm font-semibold text-white hover:bg-green-500 transition text-center"
+                  className="rkr-btn rkr-btn-primary rkr-btn-arrow text-center"
                 >
-                  Book a Consultation
+                  Book a Consultation <span>→</span>
                 </a>
+
                 <a
                   href="/managed-it"
-                  className="rounded-xl border border-white/15 bg-black/30 px-6 py-3 text-sm font-semibold text-white hover:border-white/30 transition text-center"
+                  className="rkr-btn rkr-btn-secondary rkr-btn-arrow text-center"
                 >
-                  Remote Support
+                  Remote Support <span>→</span>
                 </a>
               </div>
             </div>

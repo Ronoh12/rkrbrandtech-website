@@ -3,11 +3,16 @@ import { useEffect, useMemo, useState } from "react";
 import logo from "../assets/rkr_logo_transparent.png";
 
 const desktopLinkClass = ({ isActive }) =>
-  `px-3 py-2 rounded-lg text-sm transition whitespace-nowrap ${
+  [
+    "group relative inline-flex items-center justify-center",
+    "px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap",
+    "transition-all duration-200",
+    "border backdrop-blur-md",
+    "focus:outline-none focus-visible:ring-2 focus-visible:ring-green-200/25",
     isActive
-      ? "bg-green-600/20 text-green-300"
-      : "text-gray-200 hover:text-white hover:bg-white/5"
-  }`;
+      ? "border-green-500/35 bg-green-500/12 text-green-600 shadow-[0_0_0_1px_rgba(34,197,94,0.12)]"
+      : "border-white/10 bg-white/5 text-gray-200 hover:text-white hover:border-white/30 hover:bg-white/10",
+  ].join(" ");
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -66,7 +71,11 @@ export default function Navbar() {
           <div className="flex items-center gap-2 flex-nowrap overflow-x-auto no-scrollbar">
             {links.map((l) => (
               <NavLink key={l.to} to={l.to} className={desktopLinkClass}>
-                {l.label}
+                {/* Ultra-premium hover glow */}
+                <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition">
+                  <span className="absolute -right-10 -top-10 h-24 w-24 rounded-full bg-green-500/15 blur-2xl" />
+                </span>
+                <span className="relative z-10">{l.label}</span>
               </NavLink>
             ))}
           </div>
@@ -74,15 +83,23 @@ export default function Navbar() {
 
         {/* Right: Desktop button + Mobile hamburger */}
         <div className="flex items-center gap-3">
+          {/* Primary CTA */}
           <a
             href="/contact"
-            className="hidden md:inline-flex rounded-xl bg-green-600 px-5 py-3 text-sm font-semibold hover:bg-green-500 transition whitespace-nowrap"
+            className="hidden md:inline-flex items-center justify-center rounded-full
+                       bg-green-600 px-6 py-3 text-sm font-semibold text-white
+                       transition-all duration-200
+                       hover:bg-green-500
+                       hover:shadow-[0_18px_60px_rgba(34,197,94,0.25)]
+                       focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500/30
+                       whitespace-nowrap"
           >
             Book a Consultation
           </a>
 
           <button
-            className="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
+            className="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl
+                       border border-white/10 bg-white/5 hover:bg-white/10 transition"
             onClick={() => setOpen((v) => !v)}
             aria-label="Open menu"
             aria-expanded={open}
@@ -112,7 +129,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* ✅ Overlay FIRST (z-40) - NO blur */}
+      {/* Overlay (no blur) */}
       {open && (
         <button
           className="md:hidden fixed inset-0 z-40 bg-black/60"
@@ -121,35 +138,43 @@ export default function Navbar() {
         />
       )}
 
-      {/* ✅ Menu SECOND (z-50) so it stays crisp above overlay */}
+      {/* Mobile menu */}
       <div
         className={`md:hidden fixed left-0 right-0 top-[64px] z-50 px-4 transition-all duration-300 ${
-          open ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0 pointer-events-none"
+          open
+            ? "translate-y-0 opacity-100"
+            : "-translate-y-2 opacity-0 pointer-events-none"
         }`}
       >
-        <div className="rounded-2xl border border-white/10 bg-black/85 backdrop-blur-xl p-3 shadow-lg">
-          <div className="space-y-2">
+        <div className="rounded-2xl border border-white/10 bg-black/85 backdrop-blur-xl p-3 shadow-lg overflow-hidden">
+          <div className="space-y-2 overflow-hidden">
             {links.map((l) => {
               const active = location.pathname === l.to;
               return (
                 <NavLink
                   key={l.to}
                   to={l.to}
-                  className={`block w-full px-4 py-3 rounded-xl text-sm transition border ${
+                  className={`group relative block w-full px-4 py-3 rounded-xl text-sm font-semibold transition border overflow-hidden ${
                     active
                       ? "bg-green-600/15 text-green-200 border-green-500/25"
                       : "bg-white/5 text-gray-200 border-white/10 hover:border-white/25 hover:bg-white/10"
                   }`}
                 >
-                  {l.label}
+                  <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition">
+                    <span className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-green-500/12 blur-2xl" />
+                  </span>
+                  <span className="relative z-10">{l.label}</span>
                 </NavLink>
               );
             })}
           </div>
 
+          {/* Mobile primary CTA */}
           <a
             href="/contact"
-            className="mt-3 block w-full rounded-xl bg-green-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-green-500 transition"
+            className="mt-3 block w-full rounded-xl bg-green-600 px-5 py-3 text-center text-sm font-semibold text-white
+                       hover:bg-green-500 transition
+                       hover:shadow-[0_18px_60px_rgba(34,197,94,0.25)]"
           >
             Book a Consultation
           </a>

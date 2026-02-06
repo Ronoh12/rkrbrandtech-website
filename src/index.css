@@ -61,3 +61,261 @@
     transform: translateX(100%);
   }
 }
+
+/* Ultra premium hover glow (reusable) */
+.rkr-hover-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.rkr-hover-glow::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: radial-gradient(
+      600px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(34, 197, 94, 0.22),
+      transparent 55%
+    ),
+    linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(34, 197, 94, 0.10) 45%,
+      transparent 60%
+    );
+  opacity: 0;
+  transition: opacity 250ms ease;
+  pointer-events: none;
+}
+
+.rkr-hover-glow::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -60%;
+  width: 220%;
+  height: 220%;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.10) 45%,
+    transparent 60%
+  );
+  transform: translateX(-40%) rotate(10deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rkr-hover-glow:hover::before {
+  opacity: 1;
+}
+
+.rkr-hover-glow:hover::after {
+  opacity: 1;
+  animation: rkrShine 900ms ease forwards;
+}
+
+@keyframes rkrShine {
+  0% {
+    transform: translateX(-40%) rotate(10deg);
+  }
+  100% {
+    transform: translateX(40%) rotate(10deg);
+  }
+}
+
+/* Ultra-premium CTA button */
+.rkr-cta {
+  @apply relative inline-flex items-center justify-center rounded-xl
+         bg-green-600 px-6 py-3 text-sm font-semibold text-white
+         transition-all duration-300 ease-out
+         hover:bg-green-500
+         hover:-translate-y-[1px]
+         active:translate-y-0;
+}
+
+.rkr-cta::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    120deg,
+    rgba(34,197,94,0.8),
+    rgba(34,197,94,0.2),
+    rgba(34,197,94,0.8)
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: -1;
+}
+
+.rkr-cta:hover::before {
+  opacity: 1;
+}
+
+.rkr-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    120px 40px at 50% 120%,
+    rgba(255,255,255,0.25),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.rkr-cta:hover::after {
+  opacity: 1;
+}
+
+/* ===== Ultra Premium Buttons ===== */
+.rkr-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.95rem;
+  padding: 0.85rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1;
+  transition: transform 260ms ease, border-color 260ms ease, background-color 260ms ease, color 260ms ease, box-shadow 260ms ease;
+  will-change: transform;
+  user-select: none;
+}
+
+.rkr-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.18);
+}
+
+.rkr-btn:active {
+  transform: translateY(0px) scale(0.99);
+}
+
+/* Primary */
+.rkr-btn-primary {
+  background: rgba(22, 163, 74, 1);
+  color: white;
+  box-shadow: 0 12px 35px rgba(34, 197, 94, 0.18);
+}
+
+.rkr-btn-primary:hover {
+  background: rgba(34, 197, 94, 1);
+  transform: translateY(-1px);
+  box-shadow: 0 16px 45px rgba(34, 197, 94, 0.26);
+}
+
+/* Premium glow + sheen */
+.rkr-btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    120deg,
+    rgba(34, 197, 94, 0.85),
+    rgba(34, 197, 94, 0.15),
+    rgba(34, 197, 94, 0.85)
+  );
+  opacity: 0;
+  transition: opacity 320ms ease;
+  z-index: -1;
+  filter: blur(10px);
+}
+
+.rkr-btn-primary:hover::before {
+  opacity: 1;
+}
+
+.rkr-btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    140px 50px at 50% 120%,
+    rgba(255, 255, 255, 0.28),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 280ms ease;
+}
+
+.rkr-btn-primary:hover::after {
+  opacity: 1;
+}
+
+/* Secondary (outlined, glassy) */
+.rkr-btn-secondary {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(0, 0, 0, 0.35);
+  color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+}
+
+.rkr-btn-secondary:hover {
+  border-color: rgba(34, 197, 94, 0.55);
+  color: rgba(187, 247, 208, 1);
+  transform: translateY(-1px);
+}
+
+/* subtle green edge glow */
+.rkr-btn-secondary::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    220px 90px at 50% 140%,
+    rgba(34, 197, 94, 0.22),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 300ms ease;
+  z-index: -1;
+  filter: blur(12px);
+}
+
+.rkr-btn-secondary:hover::before {
+  opacity: 1;
+}
+
+/* optional tiny arrow animation helper */
+.rkr-btn-arrow span {
+  transition: transform 260ms ease;
+}
+.rkr-btn-arrow:hover span {
+  transform: translateX(4px);
+}
+
+/* Remove scrollbar globally */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Hide scrollbar visually but keep scroll working */
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: none;
+}
+
+/* Prevent layout shift from scrollbars */
+body {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}

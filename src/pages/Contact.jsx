@@ -205,24 +205,24 @@ export default function Contact() {
                   <div className="relative z-10">
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <h2 className="text-xl md:text-2xl font-bold text-white">
+                        <h2 className="text-xl md:text-2xl font-bold text-green-400 text-center">
                           Send a request
                         </h2>
-                        <p className="mt-1 text-sm text-gray-300">
+                        <p className="mt-1 text-sm text-gray-300 text-center">
                           We respond fast. Remote sessions are secure and only done with
                           your approval.
                         </p>
                       </div>
 
                       {/* Icon-only WhatsApp */}
-                      <a
+                      {/* <a
                         href={whatsappLink}
                         className="inline-flex items-center justify-center h-11 w-11 rounded-2xl border border-white/10 bg-black/30 text-green-200 hover:border-white/30 hover:text-green-100 transition"
                         aria-label="WhatsApp us"
                         title="WhatsApp us"
                       >
                         <IconWhatsApp className="h-5 w-5" />
-                      </a>
+                      </a> */}
                     </div>
 
                     {status === "success" && (
